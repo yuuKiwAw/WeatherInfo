@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherViewer</title>
+
+    <style type="text/css">
+        table.tftable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #a9a9a9;border-collapse: collapse;}
+        table.tftable th {font-size:12px;background-color:#b8b8b8;border-width: 1px;padding: 8px;border-style: solid;border-color: #a9a9a9;text-align:left;}
+        table.tftable tr {background-color:#cdcdcd;}
+        table.tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #a9a9a9;}
+    </style>
+        
+    <script src="./static/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            console.log('start');
+            var date = new Date();
+            var dateStr = date.toLocaleDateString();
+            $('#date').html(dateStr + "<br>");
+            getWeatherINFO();
+        });
+
+
+        function getWeatherINFO(){
+            url = "http://localhost:8000/weather";
+            $.ajax({
+                type: "GET",
+                url: url,
+                async: false,
+                success:function(data){
+                    // console.log(data);
+                    var days7_info = data['7d'];
+                    // console.log(days7_info);
+                    var day1 = days7_info['0']['0'].split(',');
+                    var day2 = days7_info['1']['0'].split(',');
+                    var day3 = days7_info['2']['0'].split(',');
+                    var day4 = days7_info['3']['0'].split(',');
+                    var day5 = days7_info['4']['0'].split(',');
+                    var day6 = days7_info['5']['0'].split(',');
+                    var day7 = days7_info['6']['0'].split(',');
+                    // console.log(day1);
+                    // console.log(day2);
+                    // console.log(day3);
+                    // console.log(day4);
+                    // console.log(day5);
+                    // console.log(day6);
+                    // console.log(day7);
+                    $('#day1').html(day1[0].substring(0, 3));
+                    $('#day2').html(day2[0].substring(0, 3));
+                    $('#day3').html(day3[0].substring(0, 3));
+                    $('#day4').html(day4[0].substring(0, 3));
+                    $('#day5').html(day5[0].substring(0, 3));
+                    $('#day6').html(day6[0].substring(0, 3));
+                    $('#day7').html(day7[0].substring(0, 3));
+
+                    $('#wea1').html(day1[3] + '-' + day1[2]);
+                    $('#wea2').html(day2[3] + '-' + day2[2]);
+                    $('#wea3').html(day3[3] + '-' + day3[2]);
+                    $('#wea4').html(day4[3] + '-' + day4[2]);
+                    $('#wea5').html(day5[3] + '-' + day5[2]);
+                    $('#wea6').html(day6[3] + '-' + day6[2]);
+                    $('#wea7').html(day7[3] + '-' + day7[2]);
+
+                    $('#cloud1').html(day1[4] + '｜' + day1[5]);
+                    $('#cloud2').html(day2[4] + '｜' + day2[5]);
+                    $('#cloud3').html(day3[4] + '｜' + day3[5]);
+                    $('#cloud4').html(day4[4] + '｜' + day4[5]);
+                    $('#cloud5').html(day5[4] + '｜' + day5[5]);
+                    $('#cloud6').html(day6[4] + '｜' + day6[5]);
+                    $('#cloud7').html(day7[4] + '｜' + day7[5]);
+
+                },
+                error:function(e){
+                    console.log(e);
+                }
+            });
+        };
+    </script>
+    
+</head>
+<body>
+    <div style="background: #b8b8b8; padding-left: 8px;">
+        <h1 style="padding: 0; margin: 0;">常熟未来七天天气预报</h1>
+        <h3 style="padding: 0; margin: 0;" id="date"></h3>
+    </div>
+
+    <div>
+        <table id="tfhover" class="tftable" border="1">
+            <tr><th id="day1"></th><th id="day2"></th><th id="day3"></th><th id="day4"></th><th id="day5"></th><th id="day6"></th><th id="day7"></th></tr>
+            <tr><td id="wea1"></td><td id="wea2"></td><td id="wea3"></td><td id="wea4"></td><td id="wea5"></td><td id="wea6"></td><td id="wea7"></td></tr>
+            <tr><td id="cloud1"></td><td id="cloud2"></td><td id="cloud3"></td><td id="cloud4"></td><td id="cloud5"></td><td id="cloud6"></td><td id="cloud7"></td></tr>
+        </table>
+    </div>
+</body>
+</html>

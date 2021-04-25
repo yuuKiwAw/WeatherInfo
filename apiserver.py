@@ -22,9 +22,15 @@ async def welcome():
 
 @app.get("/weather")
 async def weather():
-    weather_json = GETWEATHER.selectinfo()
-    print(weather_json)
-    return weather_json
+    try:
+        weather_json = GETWEATHER.selectinfo()
+        # print(weather_json)
+        print('获取天气api成功')
+        return weather_json
+    except IOError as ex:
+        print('获取天气api失败')
+        print(ex)
+        return {'failed'}
 
 if __name__ == "__main__":
     uvicorn.run(app='apiserver:app', host='localhost', port=8000, reload=True, debug=True)

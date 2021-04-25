@@ -8,14 +8,14 @@ class GETWEATHER ():
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36'
         }
-        url = 'http://www.weather.com.cn/weather/101190402.shtml'
+        url = '01.html'
         response = requests.get(url, headers)
         response.encoding = 'utf-8'
         with open('7dWeather/01.html', 'w') as f:
             f.write(response.text)
 
     def selectinfo():
-        html = etree.parse('7dWeather/01.html', etree.HTMLParser())
+        html = etree.parse('01.html', etree.HTMLParser())
         result = html.xpath('//script/text()')
         str_result = result[0].replace('var hour3data=', '')
         dic_result = json.loads(str_result)
