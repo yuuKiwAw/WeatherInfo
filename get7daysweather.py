@@ -8,10 +8,10 @@ class GETWEATHER ():
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36'
         }
-        url = '01.html'
+        url = 'http://www.weather.com.cn/weather/101190402.shtml'
         response = requests.get(url, headers)
         response.encoding = 'utf-8'
-        with open('7dWeather/01.html', 'w') as f:
+        with open('01.html', 'w', encoding='utf-8') as f:
             f.write(response.text)
 
     def selectinfo():
@@ -23,6 +23,7 @@ class GETWEATHER ():
 
 
 def main():
+    # GETWEATHER.getMainPage()
     print(GETWEATHER.selectinfo())
 
 
