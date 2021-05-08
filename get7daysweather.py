@@ -1,5 +1,6 @@
 import requests
 import json
+import cx_Oracle
 from lxml import etree
 
 
@@ -21,9 +22,18 @@ class GETWEATHER ():
         dic_result = json.loads(str_result)
         return dic_result
 
+    def sqlinsert():
+        conn_Info = 'ecology/ecology@192.168.218.142:1521/ecology'
+        connection_oracle = cx_Oracle.Connection(conn_Info)
+        cursor_oracle = connection_oracle.cursor()
+        sql = 'select * from formtable_main_1410'
+        cursor_oracle.exclude(sql)
+        cursor_oracle.close()
+        connection_oracle.close()
+
 
 def main():
-    # GETWEATHER.getMainPage()
+    GETWEATHER.getMainPage()
     print(GETWEATHER.selectinfo())
 
 
