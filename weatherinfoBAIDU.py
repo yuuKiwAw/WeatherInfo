@@ -37,7 +37,7 @@ class WEATHER_BAIDU ():
             bdweaCS_Data_Dict = {}
             bdweaCS_Data_Json = json.loads(json.dumps(bdweaCS_Data_Dict))
             i = 0
-            while i < 7:
+            while i < 8:
                 date = dictData['15_day_forecast']['info'][i]['date']  # 日期
                 wind_direction_day = dictData['15_day_forecast']['info'][i]['wind_direction_day']  # 风向
                 wind_power_day = dictData['15_day_forecast']['info'][i]['wind_power_day']  # 风量
